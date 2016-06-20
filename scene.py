@@ -9,7 +9,7 @@ class SceneObject:
 		pass
 
 class Scene:
-	def __init__(self, n, m):
+	def __init__(self, n = 9, m = 13):
 		self.n = n
 		self.m = m
 		self.scene_objects = []
@@ -37,7 +37,7 @@ class Scene:
 	def render(self):
 		colors = self.n * [self.m * [defs.Color()]]
 
-		for obj in scene_objects:
+		for obj in self.scene_objects:
 			pos = obj.pos
 			for i,row in enumerate(obj.data):
 				if pos.i+i < 0:
