@@ -1,16 +1,6 @@
+import defs
+
 import spidev
-
-class Pos:
-	def __init__(self, i=0, j=0):
-		self.i = i
-		self.j = j
-
-class Color:
-	def __init__(self, red = 0, green = 0, blue = 0, brightness = 0):
-		self.red = red
-		self.green = green
-		self.blue = blue
-		self.brightness = brightness
 
 class Display:
 	def __init__(self, n = 9, m = 13):
@@ -48,7 +38,7 @@ class Display:
 
 		for i,color_row in enumerate(colors):
 			for j,color in enumerate(color_row):
-				self.setPixel(Pos(i,j), color)
+				self.setPixel(defs.Pos(i,j), color)
 
 	def update(self):
 		# Start frame
@@ -62,7 +52,7 @@ class Display:
 			self.spi.xfer2([0x00])
 
 	def clearFrame(self):
-		self.setFrame(self.n * [ self.m * [Color()] ])
+		self.setFrame(self.n * [ self.m * [defs.Color()] ])
 
 	def close(self):
 		self.clearFrame()
