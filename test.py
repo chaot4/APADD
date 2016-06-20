@@ -1,13 +1,14 @@
-import dummy_display as display
+#import dummy_display as display
+import display
 import defs
 import scene
 import time
 
 d = display.Display()
-n = display.Color()
-r = display.Color(200, 0, 0, 20)
-g = display.Color(0, 200, 0, 20)
-b = display.Color(0, 0, 200, 20)
+n = defs.Color()
+r = defs.Color(200, 0, 0, 20)
+g = defs.Color(0, 200, 0, 20)
+b = defs.Color(0, 0, 200, 20)
 
 #for _ in range(10):
 #	d.clearFrame()
@@ -65,6 +66,7 @@ b = display.Color(0, 0, 200, 20)
 #		d.update()
 #		time.sleep(0.05)
 
+d.clearFrame()
 s = scene.Scene()
 data = [ \
 [ r, n, r], \
@@ -73,9 +75,11 @@ data = [ \
 obj = scene.SceneObject(data, defs.Pos(2,2))
 s.addObjects([obj])
 d.setFrame(s.render())
-time.sleep(5)
+d.update()
+time.sleep(1)
 s.moveObject(0, (2,2))
 d.setFrame(s.render())
-time.sleep(5)
+d.update()
+time.sleep(1)
 
 d.close()

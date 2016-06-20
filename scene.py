@@ -31,7 +31,9 @@ class Scene:
 			pos.j += direction[1]
 
 	def render(self):
-		colors = self.n * [self.m * [defs.Color()]]
+		colors = []
+		for _ in range(self.n):
+			colors.append(self.m * [defs.Color()])
 
 		for obj in self.scene_objects:
 			pos = obj.pos
