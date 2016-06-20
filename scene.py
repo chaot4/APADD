@@ -5,7 +5,6 @@ class SceneObject:
 		self.data = data
 		self.pos = pos
 		self.brightness_scaling = brightness_scaling
-		self.rotate = 0
 		pass
 
 class Scene:
@@ -31,26 +30,21 @@ class Scene:
 			pos.i += direction[0]
 			pos.j += direction[1]
 
-	def rotateObject(self, id, amount):
-		self.scene_objects[id].rotate = (self.scene_objects[id].rotate + amount)%4
-
 	def render(self):
 		colors = self.n * [self.m * [defs.Color()]]
 
 		for obj in self.scene_objects:
 			pos = obj.pos
-			for i,row in enumerate(obj.data):
-				if pos.i+i < 0:
-					continue
-				if pos.i+i >= self.n:
-					break
+			data = obj.data
 
-				for j,color in enumerate(row):
-					if pos.j+j < 0:
-						continue
-					if pos.j+j >= self.m:
-						break
-
-					colors[pos.i+i][pos.j+j] = color
+			min_i = max(0, pos.i)
+			max_i = min(self.n, pos.i+len(data))
+			for i in range(min_i, max_i):
+				row = data[i-pos.i]
+				min_j = max(0, pos.j)
+				max_j = min(self.m, pos.j+len(row))
+				for j in range(min_j, max_j):
+					color = row[j-pos.j]
+					colors[i][j] = color
 
 		return colors
